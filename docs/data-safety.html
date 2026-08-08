@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MadridOcio - Seguridad de los Datos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(15, 23, 42, 0.65);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary: #ff6b35;
+      --primary-rgb: 255, 107, 53;
+      --secondary: #a855f7;
+      --accent-glow: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, rgba(168, 85, 247, 0.05) 70%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-image: var(--accent-glow);
+      background-attachment: fixed;
+    }
+
+    header {
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(12px);
+      background: rgba(11, 15, 25, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .app-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .app-title span {
+      color: var(--primary);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-btn.active {
+      background: rgba(255, 107, 53, 0.15);
+      border-color: rgba(255, 107, 53, 0.3);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 107, 53, 0.1);
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      background: rgba(var(--primary-rgb), 0.1);
+      color: var(--primary);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      border-left: 3px solid var(--primary);
+      padding-left: 12px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: #d1d5db;
+      font-size: 15px;
+      text-align: justify;
+    }
+
+    ul {
+      margin-bottom: 20px;
+      padding-left: 20px;
+      color: #d1d5db;
+      font-size: 15px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 25px 0;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.01);
+      font-size: 14px;
+      color: #d1d5db;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: auto;
+      background: rgba(11, 15, 25, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 24px;
+      }
+      h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="app-title">Madrid<span>Ocio</span></div>
+      <nav>
+        <a href="index.html" class="nav-btn">Política de Privacidad</a>
+        <a href="data-safety.html" class="nav-btn active">Seguridad de los Datos</a>
+        <a href="financial.html" class="nav-btn">Funciones Financieras</a>
+        <a href="health.html" class="nav-btn">Aplicaciones de Salud</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Seguridad y Seguridad de los Datos</h1>
+      <div class="subtitle">
+        <span class="badge">Google Play Data Safety</span>
+        <span>Declaración Requerida</span>
+      </div>
+
+      <p>Google Play exige a los desarrolladores detallar cómo recopilan y protegen los datos de los usuarios. A continuación se expone la declaración oficial de seguridad de los datos para la aplicación móvil <strong>MadridOcio</strong>.</p>
+
+      <h2>1. Resumen de Seguridad de Datos</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo de Datos</th>
+              <th>¿Se recopilan?</th>
+              <th>¿Se comparten?</th>
+              <th>Propósito y Tratamiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ubicación aproximada y precisa</strong></td>
+              <td>No</td>
+              <td>No</td>
+              <td>Procesada solo localmente en tiempo real en el dispositivo para centrar el mapa.</td>
+            </tr>
+            <tr>
+              <td><strong>Datos del calendario del dispositivo</strong></td>
+              <td>No</td>
+              <td>No</td>
+              <td>Solo escritura local para guardar recordatorios de actividades de forma manual.</td>
+            </tr>
+            <tr>
+              <td><strong>Información personal</strong> (nombre, email, etc.)</td>
+              <td>No</td>
+              <td>No</td>
+              <td>La aplicación no cuenta con registros ni formularios de entrada de datos.</td>
+            </tr>
+            <tr>
+              <td><strong>Identificadores de dispositivo</strong></td>
+              <td>No</td>
+              <td>No</td>
+              <td>No se accede a ningún identificador de hardware del teléfono.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Prácticas de Seguridad</h2>
+      <ul>
+        <li>
+          <strong>Datos cifrados en tránsito:</strong> La aplicación descarga la agenda de actividades culturales desde los servidores oficiales del Ayuntamiento de Madrid utilizando conexiones seguras bajo protocolo <strong>HTTPS</strong>. Dado que la aplicación no recopila ni envía datos del usuario hacia ningún servidor externo, no se transmiten datos privados que cifrar en tránsito.
+        </li>
+        <li>
+          <strong>Control total del usuario (Derecho a eliminación):</strong> Dado que todos los datos sensibles (como tus recordatorios o favoritos) se almacenan localmente en tu dispositivo a través del espacio privado de la app, tienes control total para eliminarlos en cualquier momento simplemente borrando la memoria caché del navegador de tu app o desinstalando la aplicación.
+        </li>
+      </ul>
+
+      <h2>3. Declaración de Ausencia de Recopilación</h2>
+      <p>Confirmamos formalmente que MadridOcio <strong>no comparte ningún dato con terceros</strong> y <strong>no recopila datos de usuario de ningún tipo</strong> de acuerdo con las especificaciones de seguridad de la consola de Google Play.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 MadridOcio. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
